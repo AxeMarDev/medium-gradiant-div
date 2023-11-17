@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import Gradientdiv from "./components/Gradientdiv";
+import GradientBorderDiv from "./components/GradientBorderDiv";
+import QuoteAPI from "./components/QuoteAPI";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = () =>{
+
+    const [quote , setQuote ] = useState("")
+
+    useEffect(() => {
+        QuoteAPI().then( res =>  setQuote(res))
+    }, []);
+
+    return (
+        <Gradientdiv className={ " w-screen h-screen flex justify-center grid content-center" } >
+            <GradientBorderDiv className={"bg-[#0F0F0F] flex justify-center grid content-center p-10"} radius={"rounded-2xl"}>
+                <p className={"text-white text-3xl"}>"{quote}"</p>
+            </GradientBorderDiv>
+        </Gradientdiv>
+    );
 }
-
 export default App;
